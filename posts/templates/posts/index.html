@@ -4,4 +4,12 @@
 
 <h1>Post Feed</h1>
 
+<div class="container">
+	<ul>
+		{% for post in posts %}
+		<li><a href="/posts/details/{{post.id}}">{{post.caption}}</a></li>
+		{% endfor %}
+	</ul>
+</div>
+
 {% endblock %}
