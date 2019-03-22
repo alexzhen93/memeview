@@ -13,7 +13,7 @@ def index(request):
 
 	context = {
 		'title': "Post Feed",
-		'posts': posts
+		'posts': posts,
 	}
 
 	return render(request, 'posts/index.html', context)
@@ -23,7 +23,8 @@ def details(request, id):
 	post = Posts.objects.get(id=id)
 
 	context = {
-		'post': post
+		'post': post,
+		'css': "posts/details.css"
 	}
 
 	return render(request, 'posts/details.html', context)

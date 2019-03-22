@@ -1,0 +1,41 @@
+[33mcommit 4aa34b3e6d5aaf32a74c1691f1ada4acd7f9a019[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/posts_darius[m[33m)[m
+Author: Darius <sanagusd@bxscience.edu>
+Date:   Thu Mar 21 01:13:07 2019 -0400
+
+    made some aesthetic changes
+
+[33mcommit e75486e939a26f36676be950159f50636378a8c2[m
+Author: Darius <sanagusd@bxscience.edu>
+Date:   Wed Mar 20 18:20:20 2019 -0400
+
+    posts can now show posts
+
+[33mcommit 85c8930f81562f9b1bcb7f4a5b63bca5a9467722[m
+Author: Darius <sanagusd@bxscience.edu>
+Date:   Wed Mar 20 17:16:33 2019 -0400
+
+    added header bar and made progress on posts interface in django admin panel
+
+[33mcommit b8e9b2829cce61e5e5e4b009fb70555657077255[m
+Author: Darius <sanagusd@bxscience.edu>
+Date:   Wed Mar 20 16:21:25 2019 -0400
+
+    init commit to posts_darius branch
+
+[33mcommit 6426fb82bf0dad20d18f265d1414696728c373f6[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Darius <darius.sanagustin116@gmail.com>
+Date:   Fri Mar 15 13:27:07 2019 -0400
+
+    added /seeddb route to app with BootStrap 3
+
+[33mcommit b655b0535c303c0303f94ceb0fa194b1eac0cca9[m
+Author: Darius <darius.sanagustin116@gmail.com>
+Date:   Fri Mar 15 13:00:52 2019 -0400
+
+    added mysqlclient install for Python 3.7 users
+
+[33mcommit c568719e3429e8ab5b5eabdda6852679b5138f03[m
+Author: Darius <darius.sanagustin116@gmail.com>
+Date:   Fri Mar 15 12:34:43 2019 -0400
+
+    init commit
