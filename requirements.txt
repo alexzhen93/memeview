@@ -1,0 +1,4 @@
+Django==2.1.7
+mysqlclient==1.4.2
+pytz==2018.9
+sqlparser==0.0.9
