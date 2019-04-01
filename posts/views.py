@@ -6,10 +6,8 @@ from .models import Posts
 # Create your views here.
 def index(request):
 
-	# First 10 post objects
-	posts = Posts.objects.all()[:10]
-
-
+	# All post objects
+	posts = Posts.objects.all()
 
 	context = {
 		'title': "Post Feed",
