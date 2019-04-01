@@ -134,7 +134,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'landing/templates/landing/index.html'
+LOGOUT_REDIRECT_URL = 'landing/templates/landing/index.html'
 
 
