@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.utils import timezone
 from django.contrib.auth.models import User 
+from django.urls import reverse
 
 # Create your models here.
 class Posts(models.Model):
@@ -12,6 +13,9 @@ class Posts(models.Model):
 	
 	def __str__(self):
 		return self.caption[0:10] + "..."
+
+	def get_absolute_url(self):
+		return reverse('post-detail', kwargs={'pk': self.pk})
 
 	class Meta:
 		verbose_name_plural = "Posts"

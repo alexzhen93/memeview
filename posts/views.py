@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Posts
+from django.views.generic import CreateView
 
 def index(request):
 
@@ -13,7 +14,6 @@ def index(request):
 
 	return render(request, 'posts/index.html', context)
 
-
 def details(request, id):
 	post = Posts.objects.get(id=id)
 
@@ -23,3 +23,13 @@ def details(request, id):
 	}
 
 	return render(request, 'posts/details.html', context)
+
+class PostCreateView(CreateView):
+	model = Posts
+	fields = ['caption', 'image']
+
+	def form_valid(self, form):
+		form.instance.author = self.request.user
+
+		#overriding default form valid before returning
+		return super().form_valid(form)
