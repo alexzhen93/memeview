@@ -15,7 +15,7 @@ class Posts(models.Model):
 		return self.caption[0:10] + "..."
 
 	def get_absolute_url(self):
-		return reverse('post-detail', kwargs={'pk': self.pk})
+		return reverse('post-detail', kwargs={'id': self.pk})
 
 	class Meta:
 		verbose_name_plural = "Posts"
