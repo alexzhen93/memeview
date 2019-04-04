@@ -2,7 +2,9 @@
 
 {% block content %}
 
-
+{% if user.is_authenticated %}
+<a class="btn btn-lg btn-primary" href="/posts/new">Create New Meme</a>
+{% endif %}
 
 <h1>Post Feed</h1>
 
