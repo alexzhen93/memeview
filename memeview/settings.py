@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'landing',
     'posts',
     'seeddb',
+    'users.apps.UsersConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -132,3 +134,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'posts-index' # redirect successful login to posts page
+
+#LOGOUT_REDIRECT_URL = 'posts-index' # redirect successful logout to posts page

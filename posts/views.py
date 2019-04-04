@@ -1,16 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
 from .models import Posts
 
-# Create your views here.
 def index(request):
 
 	# First 10 post objects
 	posts = Posts.objects.all()[:10]
-
-
-
 	context = {
 		'title': "Post Feed",
 		'posts': posts,

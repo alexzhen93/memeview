@@ -28,11 +28,25 @@
 			<li><a href="/posts">Posts</a></li>
 			<li><a href="/seeddb">Seed Database</a></li>
 			<li><a href="/admin">Admin Login</a></li>
+			{% if user.is_authenticated %} <!-- if user logged in, show 'logout' -->
+				<li><a class="bth text-right" href="{% url 'logout' %}">Logout</a></li>
+			{% else %} <!-- if user logged out, show 'login' and 'register' -->
+				<li><a class="bth text-right" href="{% url 'login' %}">Login</a></li>
+				<li><a href="{% url 'register' %}">Register</a></li> 
+			{% endif %}
 		</ul>
 		</div>
 	</nav>
 
 	<div class="container">
+		<!-- Display messages -->
+		{% if messages %}
+			{% for message in messages %}
+				<div class = "alert alert-{{ message.tags }}">
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endif %}
 		{% block content %}
 		{% endblock %}
 	</div>
