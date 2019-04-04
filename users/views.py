@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 #from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm # import custom form
+from django.contrib.auth.decorators import login_required
+
 
 # register user
 def register(request):
@@ -16,3 +18,7 @@ def register(request):
 	else:
 		form = UserRegisterForm() # no new uer
 	return render(request, 'users/register.html', {'form': form})
+
+@login_required # decorater to restrict user to have logged in to access page
+def profile(request):
+	return render(request, 'users/profile.html')

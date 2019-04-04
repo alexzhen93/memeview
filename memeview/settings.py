@@ -135,8 +135,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # directory where uploaded files are located
+MEDIA_URL = '/media/' 
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'posts-index' # redirect successful login to posts page
-
-#LOGOUT_REDIRECT_URL = 'posts-index' # redirect successful logout to posts page
+LOGIN_URL = 'login' # login url
