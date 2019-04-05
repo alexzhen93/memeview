@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf.urls import url
 from . import views
-from .views import PostCreateView, PostUpdateView
+from .views import PostCreateView, PostUpdateView, PostDeleteView
 
 urlpatterns = [
 	path('', views.index, name='posts-index'),
@@ -10,6 +10,8 @@ urlpatterns = [
 	url(r'^details/(?P<id>\d+)/$', 
 		views.details, name='post-detail'),
 	path('update/<int:pk>/', PostUpdateView.as_view(),
-		name='post-update')
+		name='post-update'),
+	path('delete/<int:pk>/', PostDeleteView.as_view(),
+		name='post-delete')
 
 ]

@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from .models import Posts
 from django.views.generic import (
 	CreateView, 
-	UpdateView
+	UpdateView,
+	DeleteView
 )
 from django.contrib.auth.mixins import (
 	LoginRequiredMixin,
@@ -56,5 +57,15 @@ class PostUpdateView(LoginRequiredMixin,
 	# enforces that only authors can edit their own posts
 	def test_func(self):
 		post = self.get_object()
-		
 		return (self.request.user == post.author)
+
+class PostDeleteView(LoginRequiredMixin, 
+	UserPassesTestMixin, DeleteView):
+	model = Posts
+	success_url = "/posts"
+
+	# enforces that only authors can delete their own posts
+	def test_func(self):
+		post = self.get_object()
+		return (self.request.user == post.author)
+
