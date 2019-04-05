@@ -6,9 +6,18 @@
 	<p id="caption">{{post.caption}}</p>
 	<img id="meme_img" src="{{post.image}}">
 	<br>
+
+	{% if user == post.author %}
+		<a id="edit_button" class="btn btn-sm btn-info" href="/posts/update/{{post.id}}">Edit Post</a>
+	{% endif %}
+
 	<p id="created_date">Posted by <strong>{{post.author}}</strong> on {{post.created_at}}</p>
+
+
 </div>
 
-<a href="/posts" class="btn btn-default">Return to Posts</a>
+
+
+<a href="/posts" class="spaced btn btn-default">Return to Posts</a>
 
 {% endblock %}

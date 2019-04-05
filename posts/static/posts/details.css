@@ -24,5 +24,16 @@
 #created_date {
 	text-align: right;
 	font-size: 1em;
+	display: inline-block;
+	align-self: right;
+}
+
+#edit_button {
+	display: inline-block;
+}
+
+a.spaced {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
