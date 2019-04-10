@@ -10,6 +10,7 @@ class Posts(models.Model):
 	image = models.CharField(max_length=255)
 	created_at = models.DateTimeField(default=datetime.now, blank=True)
 	author = models.ForeignKey(User, on_delete=models.CASCADE)
+	likes = models.ManyToManyField(User, related_name = 'likes', blank = True)
 	
 	def __str__(self):
 		return self.caption[0:10] + "..."
@@ -20,3 +21,18 @@ class Posts(models.Model):
 	class Meta:
 		verbose_name_plural = "Posts"
 
+#Comments
+class Comment(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	comment = models.TextField(max_length=255)
+	parentPost = models.ForeignKey(Posts, on_delete=models.CASCADE);
+	timestamp = models.DateTimeField(default=datetime.now, blank=True)
+
+	def __str__(self):
+		return '{}-{}'.format(self.post.title, str(self.user.username))
+
+	def delete_comment(self):
+		self.delete()
+
+	def save_comment(self):
+		self.save()

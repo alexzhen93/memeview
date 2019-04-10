@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Posts
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from .models import Posts, Comment
+from .forms import CommentForm
 from django.views.generic import (
 	CreateView, 
 	UpdateView,
@@ -10,6 +11,7 @@ from django.contrib.auth.mixins import (
 	LoginRequiredMixin,
 	UserPassesTestMixin
 )
+from django.views.generic.base import RedirectView
 
 def index(request):
 
@@ -23,14 +25,37 @@ def index(request):
 	return render(request, 'posts/index.html', context)
 
 def details(request, id):
-	post = Posts.objects.get(id=id)
+
+	postid = id;
+
+	post = Posts.objects.get(id=postid)
+	is_liked = False
+	if post.likes.filter(id=request.user.id).exists():
+		is_liked = True
+	comments = Comment.objects.filter(parentPost=postid).order_by('-id')
+
+	if request.method == 'POST':
+		comment_form = CommentForm(request.POST or None)
+		if comment_form.is_valid():
+			comment = request.POST.get('comment')
+			comments = comments.create(parentPost = post, user = request.user, comment = comment)
+			comments.save()
+			return HttpResponseRedirect(post.get_absolute_url())
+
+	else:
+		comment_form = CommentForm()
 
 	context = {
 		'post': post,
-		'css': "posts/details.css"
+		'css': "posts/details.css",
+		'comments': comments,
+		'comment_form': comment_form,
+		'is_liked': is_liked
+
 	}
 
 	return render(request, 'posts/details.html', context)
+
 
 class PostCreateView(LoginRequiredMixin, 
 	 CreateView):
@@ -69,3 +94,30 @@ class PostDeleteView(LoginRequiredMixin,
 		post = self.get_object()
 		return (self.request.user == post.author)
 
+def add_comment(request, slug):
+	post = get_object_or_404(Posts, slug = slug)
+	if request.method == 'POST':
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment = form.save(commit = False)
+			comment.post = post
+			comment.save()
+			return Comment
+	else:
+		form = CommentForm()
+	return render(request, template, context)
+
+class PostLikeToggle(LoginRequiredMixin, RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        print(slug) #Prints the slug
+        obj = get_object_or_404(Posts, slug=slug)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated():
+            if user in obj.likes.all():
+                obj.likes.remove(user)
+            else:
+                obj.likes.add(user)
+        print(url_)
+        return url_

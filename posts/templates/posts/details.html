@@ -1,3 +1,4 @@
+
 {% extends 'posts/layout.html' %}
 
 {% block content %}
@@ -13,12 +14,46 @@
 	{% endif %}
 
 	<p id="created_date">Posted by <strong>{{post.author}}</strong> on {{post.created_at}}</p>
-
-
 </div>
 
 
 
 <a href="/posts" class="spaced btn btn-default">Return to Posts</a>
+
+<form action="{{posts.get_api_like_url}}" method="post">
+    {% csrf_token %}
+    {% if user in post.likes.all %}
+    <button type="submit" name="post_slug" value="{{ posts.slug }}" class="btn btn-link like_button">Dislike</button>
+    {% else %}
+    <button type="submit" name="post_slug" value="{{ posts.slug }}" class="btn btn-link like_button">Like</button>
+    {% endif %}
+
+</form>
+
+<!--Comment-->
+<br><br>
+<hr>
+
+<div class="main-comment-section">
+	<h2>Comment Section</h2>
+	{% for comment in comments %}
+	<blockquote class="blockquote">
+		<p class="mb-0">{{ comment.comment }}</p>
+
+		<footer class="blockquote-footer">by <cite title="Source Title">{{ comment.user|capfirst}} on {{ comment.timestamp }}</cite></footer>
+	</blockquote>
+	<br>
+	{% endfor %}
+</div>
+
+<form method="post">
+	{% csrf_token %}
+	{{ comment_form.as_p }}
+	{% if user.is_authenticated %}
+		<input type="submit" value="Submit" class="btn btn-outline-success">
+	{% else %}
+		<input type="submit" value="Submit" class="btn btn-outline-success" disabled>
+	{% endif %}	
+</form>
 
 {% endblock %}
