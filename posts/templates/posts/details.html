@@ -1,6 +1,6 @@
 
 {% extends 'posts/layout.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="jumbotron">
@@ -35,7 +35,7 @@
 <hr>
 
 <div class="main-comment-section">
-	<h2>Comment Section</h2>
+	<h2>Comments</h2>
 	{% for comment in comments %}
 	<blockquote class="blockquote">
 		<p class="mb-0">{{ comment.comment }}</p>
