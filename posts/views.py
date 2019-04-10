@@ -11,6 +11,10 @@ from django.contrib.auth.mixins import (
 	UserPassesTestMixin
 )
 
+from django.views.generic.base import (
+	RedirectView
+)
+
 def index(request):
 
 	# First 10 post objects
@@ -68,4 +72,17 @@ class PostDeleteView(LoginRequiredMixin,
 	def test_func(self):
 		post = self.get_object()
 		return (self.request.user == post.author)
-
+		
+class PostLikeToggle(LoginRequiredMixin, RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        obj = get_object_or_404(Posts, slug=slug)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated():
+            if user in obj.likes.all():
+                obj.likes.remove(user)
+            else:
+                obj.likes.add(user)
+        print(url_)
+        return url_
