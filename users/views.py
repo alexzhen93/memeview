@@ -3,6 +3,7 @@ from django.contrib import messages
 from .forms import UserRegisterForm # import custom form
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 
 # register user
@@ -26,11 +27,25 @@ def profile(request, username = None):
 	return render(request, 'users/profile.html')
 
 @login_required
-def update_profile(request, user_id):
-    user = User.objects.get(pk=user_id)
-    user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
-    user.save()
+def edit_profile(request):
+	if request.method == 'POST':
+		u_form = UserUpdateForm(request.POST, instance = request.user)
+		p_form = ProfileUpdateForm(request.POST, request.FILES, instance = request.user.profile)
+		if u_form.is_valid() and p_form.is_valid():
+			u_form.save()
+			p_form.save()
+			messages.success(request, f'Your account has been updated!')
+			return redirect('profile')
+	else:
+		u_form = UserUpdateForm(instance = request.user)
+		p_form = ProfileUpdateForm(instance = request.user.profile)
 
-def get_user_profile(request, username):
+	context = {
+		'u_form': u_form,
+		'p_form': p_form
+	}
+	return render(request, 'users/edit_profile.html', context)
+
+def get_user_profile(request, username = None):
 	user = User.objects.get(username = username)
 	return render(request, 'users/profile.html', {"user": user})

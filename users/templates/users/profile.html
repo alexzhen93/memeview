@@ -8,8 +8,14 @@
 				<h2 class = "account-heading">{{ user.username }}</h2>
 				<p class = "text-secondary">Location: {{ user.profile.location }}</p>
 				<p class = "text-secondary">Email: {{ user.email }}</p>
-				<p class = "text-secondary">Bio: {{ user.bio }}</p>
+				<p class = "text-secondary">Bio: {{ user.profile.bio }}</p>
+				<p class = "text-secondary">Birth date: {{ user.profile.birth_date }}</p>
 			</div>
+			
+			<form action = "/profile/edit/">
+				<button class="btn btn-outline-info" type = "submit">Edit Profile</button>
+			</form>
+			
 		</div>
 	</div>
 {% endblock content %}
