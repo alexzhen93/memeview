@@ -6,6 +6,8 @@ class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete = models.CASCADE)
 	# add features of user profile
 	image = models.ImageField(default = 'default.jpg', upload_to = 'profile_pics') # profile pic
+	firstname = models.TextField(max_length = 15, blank = True)
+	lastname = models.TextField(max_length = 15, blank = True)
 	bio = models.TextField(max_length = 500, blank = True)
 	location = models.CharField(max_length = 250, blank = True)
 	birth_date = models.DateField(null = True, blank = True)

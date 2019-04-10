@@ -34,10 +34,11 @@
 <!--Comment-->
 <br><br>
 <hr>
-<h2>Comments</h2>
+<h2>{{ comments.count }} Comment{{ comments|pluralize }}</h2>
 <form method="post">
 	{% csrf_token %}
-	{{ comment_form|crispy }}
+	{{ comment_form }}
+	<br>
 	{% if user.is_authenticated %}
 		<input type="submit" value="Post comment" class="btn btn-outline-success">
 	{% else %}
@@ -46,7 +47,7 @@
 </form>
 
 <div class="main-comment-section">
-	
+	<br>
 	{% for comment in comments %}
 	<blockquote class="blockquote">
 		<p class="mb-0">{{ comment.comment }}</p>
