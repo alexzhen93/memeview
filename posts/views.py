@@ -121,8 +121,3 @@ class PostLikeToggle(LoginRequiredMixin, RedirectView):
                 obj.likes.add(user)
         print(url_)
         return url_
-
-# def like_post(request):
-# 	post = get_object_or_404(Posts, id = request.POST.get('get_id'))
-# 	post.likes.add(request.user)
-# 	return HttpResponseRedirect(post.get_absolute_url())

@@ -48,6 +48,11 @@ def edit_profile(request):
 	}
 	return render(request, 'users/edit_profile.html', context)
 
-def get_user_profile(request, username = None):
+def get_user_profile(request, username = None, id=None):
 	user = User.objects.get(username = username)
-	return render(request, 'users/profile.html', {"user": user})
+	user_posts = Posts.objects.filter(author = user).order_by('created_at')
+	context = {
+		'customuser': user,
+		'user_posts': user_posts
+	}
+	return render(request, 'users/profile.html', context)
