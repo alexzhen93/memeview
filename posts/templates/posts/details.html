@@ -14,23 +14,15 @@
 	{% endif %}
 
 	<p id="created_date">Posted by <strong>{{post.author}}</strong> on {{post.created_at}}</p>
+	<form action="{{posts.get_api_like_url}}" method="post">
+    {% csrf_token %}
+    <button type="submit" name="post_slug" value="{{ posts.slug }}" class="btn like_button btn-primary">Like</button>
+    <button type="submit" name="post_slug" value="{{ posts.slug }}" class="btn like_button btn-danger">Dislike</button>
+
+	</form>
 </div>
 
-
-
 <a href="/posts" class="spaced btn btn-default">Return to Posts</a>
-
-<form action="{{posts.get_api_like_url}}" method="post">
-    {% csrf_token %}
-    {% if user in post.likes.all %}
-    <button type="submit" name="post_slug" value="{{ posts.slug }}" class="btn like_button btn-primary">Dislike</button>
-    {% else %}
-    <button type="submit" name="post_slug" value="{{ posts.slug }}" class="btn like_button btn-primary">Like</button>
-    {% endif %}
-
-</form>
-
-
 <!--Comment-->
 <br><br>
 <hr>
