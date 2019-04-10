@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
+from posts import views as post_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,7 +31,8 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name = 'users/login.html'), name = 'login'), # login views
     path('logout/', auth_views.LogoutView.as_view(template_name = 'users/logout.html'), name = 'logout'), # logout views
     path('seeddb/', include('seeddb.urls')),
-    path('', include('landing.urls'))
+    path('', include('landing.urls')),
+    #path('like/', post_views.like_post, name = "like_post"), # new
 ]
 
 if settings.DEBUG:

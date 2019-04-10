@@ -25,8 +25,12 @@ class Posts(models.Model):
 class Comment(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	comment = models.TextField(max_length=255)
-	parentPost = models.ForeignKey(Posts, on_delete=models.CASCADE);
+	parentPost = models.ForeignKey(Posts, on_delete=models.CASCADE)
 	timestamp = models.DateTimeField(default=datetime.now, blank=True)
+
+	# replies
+	#parent = models.ForeignKey("self", null = True, blank = True, on_delete = models.CASCADE)
+	#content_object = GenericForeignKey('content_type', 'object_id')
 
 	def __str__(self):
 		return '{}-{}'.format(self.post.title, str(self.user.username))
@@ -36,3 +40,13 @@ class Comment(models.Model):
 
 	def save_comment(self):
 		self.save()
+
+	# new replies
+	def children(self):
+		return Comment.objects.filter(parent = self)
+
+	@property
+	def is_parent(self):
+		if self.parentPost is not None:
+			return False
+		return True

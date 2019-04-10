@@ -23,19 +23,30 @@
 <form action="{{posts.get_api_like_url}}" method="post">
     {% csrf_token %}
     {% if user in post.likes.all %}
-    <button type="submit" name="post_slug" value="{{ posts.slug }}" class="btn btn-link like_button">Dislike</button>
+    <button type="submit" name="post_slug" value="{{ posts.slug }}" class="btn like_button btn-primary">Dislike</button>
     {% else %}
-    <button type="submit" name="post_slug" value="{{ posts.slug }}" class="btn btn-link like_button">Like</button>
+    <button type="submit" name="post_slug" value="{{ posts.slug }}" class="btn like_button btn-primary">Like</button>
     {% endif %}
 
 </form>
 
+
 <!--Comment-->
 <br><br>
 <hr>
+<h2>Comments</h2>
+<form method="post">
+	{% csrf_token %}
+	{{ comment_form|crispy }}
+	{% if user.is_authenticated %}
+		<input type="submit" value="Post comment" class="btn btn-outline-success">
+	{% else %}
+		<input type="submit" value="Post comment" class="btn btn-outline-success" disabled>
+	{% endif %}	
+</form>
 
 <div class="main-comment-section">
-	<h2>Comments</h2>
+	
 	{% for comment in comments %}
 	<blockquote class="blockquote">
 		<p class="mb-0">{{ comment.comment }}</p>
@@ -46,14 +57,6 @@
 	{% endfor %}
 </div>
 
-<form method="post">
-	{% csrf_token %}
-	{{ comment_form.as_p }}
-	{% if user.is_authenticated %}
-		<input type="submit" value="Submit" class="btn btn-outline-success">
-	{% else %}
-		<input type="submit" value="Submit" class="btn btn-outline-success" disabled>
-	{% endif %}	
-</form>
+
 
 {% endblock %}

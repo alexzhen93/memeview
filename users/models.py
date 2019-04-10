@@ -9,8 +9,20 @@ class Profile(models.Model):
 	bio = models.TextField(max_length = 500, blank = True)
 	location = models.CharField(max_length = 250, blank = True)
 	birth_date = models.DateField(null = True, blank = True)
+	#friends = models.ManyToManyField("Profile", blank = True) #new
 
 	def __str__(self):
 		return f'{self.user.username} Profile'
 
+	def get_absolute_url(self):
+		return "/user/{}".format(self.slug)
 
+
+# # new ; friends
+# class FriendRequest(models.Model):
+# 	to_user = models.ForeignKey(User, related_name = 'to_user')
+# 	from_user = models.ForeignKey(User, related_name = 'from_user')
+# 	timestamp = models.DateTimeField(auto_now_add = True)
+
+# 	def __str__(self):
+# 		return "From {}, to {}".format(self.from_user.username, self.to_user.username)
