@@ -28,13 +28,16 @@
 			<ul class="nav navbar-nav">
 				<li><a href="/posts">Posts</a></li>
 				<li><a href="/seeddb">Seed Database</a></li>
-				<li><a href="/admin">Admin Login</a></li>
+				{% if request.user.is_superuser %}
+					<li><a href="/admin">Admin Panel</a></li>
+				{% endif %}
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
 				<!-- restriction based on authentication -->
 				{% if user.is_authenticated %} <!-- if user logged in, show 'logout' -->
 					<li><a href="{% url 'profile' %}"><span class = "glyphicon glyphicon-user"></span> Profile</a></li>
+					<li><a href="/profile/edit/">Edit Profile</a></li>
 					<li><a href="{% url 'logout' %}"><span class = "glyphicon glyphicon-log-in"></span> Logout</a></li>
 				{% else %} <!-- if user logged out, show 'login' and 'register' -->
 					<li><a href="{% url 'login' %}">Login</a></li>
