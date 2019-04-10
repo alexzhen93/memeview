@@ -21,24 +21,27 @@
 	
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/">MemeView</a>
-		</div>
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">MemeView</a>
+			</div>
 
-		<ul class="nav navbar-nav">
-			<li><a href="/posts">Posts</a></li>
-			<li><a href="/seeddb">Seed Database</a></li>
-			<li><a href="/admin">Admin Login</a></li>
-			<!-- restriction based on authentication -->
-			{% if user.is_authenticated %} <!-- if user logged in, show 'logout' -->
-				<li><a href="{% url 'profile' %}">Profile</a></li>
-				<li><a href="{% url 'logout' %}">Logout</a></li>
-			{% else %} <!-- if user logged out, show 'login' and 'register' -->
-				<li><a href="{% url 'login' %}">Login</a></li>
-				<li><a href="{% url 'register' %}">Register</a></li> 
-			{% endif %}
-		</ul>
-		</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/posts">Posts</a></li>
+				<li><a href="/seeddb">Seed Database</a></li>
+				<li><a href="/admin">Admin Login</a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<!-- restriction based on authentication -->
+				{% if user.is_authenticated %} <!-- if user logged in, show 'logout' -->
+					<li><a href="{% url 'profile' %}"><span class = "glyphicon glyphicon-user"></span> Profile</a></li>
+					<li><a href="{% url 'logout' %}"><span class = "glyphicon glyphicon-log-in"></span> Logout</a></li>
+				{% else %} <!-- if user logged out, show 'login' and 'register' -->
+					<li><a href="{% url 'login' %}">Login</a></li>
+					<li><a href="{% url 'register' %}">Register</a></li> 
+				{% endif %}
+			</ul>
+			</div>
 	</nav>
 
 	<div class="container">

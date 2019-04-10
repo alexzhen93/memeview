@@ -9,11 +9,22 @@
 <h1>Post Feed</h1>
 
 <div class="container">
-	<ul>
+	<!-- <ul>
 		{% for post in posts %}
 		<li><a href="/posts/details/{{post.id}}">{{post.caption}}</a></li>
 		{% endfor %}
-	</ul>
+	</ul> -->
+	{% for post in posts %}
+		<article class = "media content_section" style = "border-bottom-style: solid; border-width: 1px; border-color:lightgrey">
+			<div class = "media-body ">
+				<h4 style = "margin-bottom: 1px"><a href="/posts/details/{{post.id}}">{{post.caption}}</a></h4>
+				<div class = "article-metadata">
+					By <a class = "mr-2" href="/profile">{{ post.author }}</a>
+					<small class = "text-muted">{{ post.created_at}}</small>
+				</div>
+			</div>
+		</article>
+	{% endfor %}
 </div>
 
 {% endblock %}

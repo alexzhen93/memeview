@@ -4,6 +4,7 @@ from .forms import UserRegisterForm # import custom form
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from posts.models import Posts
 
 
 # register user
@@ -22,9 +23,10 @@ def register(request):
 
 # profile page
 @login_required # decorater to restrict user to have logged in to access page
-def profile(request, username = None):
+def profile(request):
 	#user = UserProfile.objects.get(user=request.user){'profile_user': user}
-	return render(request, 'users/profile.html')
+	user_posts  = Posts.objects.filter(author=request.user).order_by('created_at')
+	return render(request, 'users/profile.html', {'user_posts': user_posts})
 
 @login_required
 def edit_profile(request):

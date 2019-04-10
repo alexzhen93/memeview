@@ -8,19 +8,29 @@
 			</div>
 			<div class = "media-body panel panel-primary">
 				<div class = "panel-heading"> 
-					<h1 class = "account-heading">{{ user.username }}</h1>
+					<h1>{{ user.username }}</h1>
 				</div>
 				<div class = "panel-body">
 					<strong> Location: </strong> <p class = "text-secondary">{{ user.profile.location }}</p>
 					<strong> Email: </strong> <p class = "text-secondary">{{ user.email }}</p>
 					<strong> Bio: </strong> <p class = "text-secondary">{{ user.profile.bio }}</p>
 					<strong> Birth date: </strong> <p class = "text-secondary">{{ user.profile.birth_date }}</p>
+					<form action = "/profile/edit/">
+						<button class="btn btn-outline-info" type = "submit">Edit Profile</button>
+					</form>
 				</div>
 			</div>
-			
-			<form action = "/profile/edit/">
-				<button class="btn btn-outline-info" type = "submit">Edit Profile</button>
-			</form>
+			<h1> Post History </h1>
+			{% for Posts in user_posts %}
+				<article style = "border-bottom-style:solid; border-bottom-width: 1px; border-color: lightgrey" class = "media content_section">
+					<div class = "media-body ">
+						<h4 style = "margin-bottom: 0px"><a href="/posts/details/{{ Posts.id }}">{{ Posts.caption }}</a></h4>
+						<div class = "article-metadata">
+							<small class = "text-muted">{{ Posts.created_at}}</small>
+						</div>
+					</div>
+				</article>
+			{% endfor %}
 			
 		</div>
 	</div>
