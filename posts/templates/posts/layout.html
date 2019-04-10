@@ -31,10 +31,10 @@
 			<li><a href="/admin">Admin Login</a></li>
 			<!-- restriction based on authentication -->
 			{% if user.is_authenticated %} <!-- if user logged in, show 'logout' -->
-				<li><a class="bth text-right" href="{% url 'profile' %}">Profile</a></li>
-				<li><a class="bth text-right" href="{% url 'logout' %}">Logout</a></li>
+				<li><a href="{% url 'profile' %}">Profile</a></li>
+				<li><a href="{% url 'logout' %}">Logout</a></li>
 			{% else %} <!-- if user logged out, show 'login' and 'register' -->
-				<li><a class="bth text-right" href="{% url 'login' %}">Login</a></li>
+				<li><a href="{% url 'login' %}">Login</a></li>
 				<li><a href="{% url 'register' %}">Register</a></li> 
 			{% endif %}
 		</ul>
