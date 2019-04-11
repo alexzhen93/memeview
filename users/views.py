@@ -26,7 +26,11 @@ def register(request):
 def profile(request):
 	#user = UserProfile.objects.get(user=request.user){'profile_user': user}
 	user_posts  = Posts.objects.filter(author=request.user).order_by('created_at')
-	return render(request, 'users/profile.html', {'user_posts': user_posts})
+	context = {
+		'user_posts': user_posts,
+		'css': "users/profile.css"
+	}
+	return render(request, 'users/profile.html', context)
 
 @login_required
 def edit_profile(request):
