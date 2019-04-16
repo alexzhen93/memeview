@@ -36,7 +36,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<!-- restriction based on authentication -->
 				{% if user.is_authenticated %} <!-- if user logged in, show 'logout' -->
-					<li><a href="{% url 'profile' %}"><span class = "glyphicon glyphicon-user"></span> Profile</a></li>
+					<li><a href="{% url 'profile' %}"><span class = "glyphicon glyphicon-user"></span> {{request.user.username}}'s Profile</a></li>
 					<li><a href="/profile/edit/">Edit Profile</a></li>
 					<li><a href="{% url 'logout' %}"><span class = "glyphicon glyphicon-log-in"></span> Logout</a></li>
 				{% else %} <!-- if user logged out, show 'login' and 'register' -->
