@@ -7,7 +7,7 @@ from django.urls import reverse
 # Create your models here.
 class Posts(models.Model):
 	caption = models.CharField(max_length=255)
-	image = models.CharField(max_length=255)
+	image = models.ImageField(default=None, upload_to='memes')
 	created_at = models.DateTimeField(default=datetime.now, blank=True)
 	author = models.ForeignKey(User, on_delete=models.CASCADE)
 	likes = models.ManyToManyField(User, related_name = 'likes', blank = True)
