@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Posts, Comment
+from .models import Posts, Comment, AllComment
 from .forms import CommentForm
 from django.views.generic import (
 	CreateView, 
@@ -56,6 +56,15 @@ def details(request, id):
 
 	return render(request, 'posts/details.html', context)
 
+def allcomments(request):
+
+	comments = AllComment.objects.all()
+	
+	context = {
+		'comments': comments
+	}
+
+	return render(request, 'posts/allcomments.html', context)
 
 class PostCreateView(LoginRequiredMixin, 
 	 CreateView):
