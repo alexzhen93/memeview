@@ -54,10 +54,13 @@ class Comment(models.Model):
 # Database view that shows all comments paired with
 # more detailed information about their authors
 class AllComment(models.Model):
-	comment = models.OneToOneField(Comment, on_delete=models.DO_NOTHING, primary_key=True)
-	author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-	
+	comment_id = models.OneToOneField(Comment, on_delete=models.DO_NOTHING, primary_key=True)
+	#author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+	comment = models.TextField(max_length=255)
+	username = models.CharField(max_length=150)
+	email = models.CharField(max_length=254)
+	timestamp = models.DateTimeField()
+
 	class Meta:
 		managed = False
 		db_table = "view_allcomments"
-		unique_together = (("comment","author"),)
