@@ -50,3 +50,14 @@ class Comment(models.Model):
 		if self.parentPost is not None:
 			return False
 		return True
+
+# Database view that shows all comments paired with
+# more detailed information about their authors
+class AllComment(models.Model):
+	comment = models.OneToOneField(Comment, on_delete=models.DO_NOTHING, primary_key=True)
+	author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+	
+	class Meta:
+		managed = False
+		db_table = "view_allcomments"
+		unique_together = (("comment","author"),)
