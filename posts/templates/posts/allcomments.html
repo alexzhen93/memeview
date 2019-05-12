@@ -9,7 +9,7 @@
 	<blockquote class="blockquote">
 		<p class="mb-0">"{{ comment.comment }}"</p>
 
-		<footer class="blockquote-footer">by <cite title="Source Title">{{ comment.username|capfirst}} on {{ comment.timestamp }}, Email: {{comment.email}}</cite></footer>
+		<footer class="blockquote-footer">by <cite title="Source Title">{{ comment.username|capfirst}} on {{ comment.timestamp }}, Email: {{comment.email}}, on <a href="/posts/details/{{comment.post_id_id}}">{{comment.caption}}</a></cite></footer>
 
 	</blockquote>
 	<br>

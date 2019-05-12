@@ -61,6 +61,8 @@ class AllComment(models.Model):
 	email = models.CharField(max_length=254)
 	timestamp = models.DateTimeField()
 
+	post_id = models.ForeignKey(Posts, on_delete=models.DO_NOTHING)
+	caption = models.CharField(max_length=255)
 	class Meta:
 		managed = False
 		db_table = "view_allcomments"
