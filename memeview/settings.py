@@ -79,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'memeviewdb',
-        'USER': 'root',
-        'PASSWORD': 'password',
+        'USER': 'lgd116',
+        'PASSWORD': 'bungabros',
         'HOST': 'localhost',
         'PORT': ''
     }
