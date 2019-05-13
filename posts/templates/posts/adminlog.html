@@ -1,0 +1,18 @@
+{% extends 'posts/layout.html' %}
+
+{% block content %}
+
+<head>
+	<h1>Admin Log</h1>
+</head>
+	
+	<body>
+	{% for log_post in log %}
+		<ul type = "square"> 
+			<li>{{ log_post }} on {{ log_post.timestamp }}</li> 
+		</ul>
+	</body>	
+
+{% endfor %}
+
+{% endblock %}

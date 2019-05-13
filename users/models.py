@@ -18,13 +18,3 @@ class Profile(models.Model):
 
 	def get_absolute_url(self):
 		return "/user/{}".format(self.slug)
-
-
-# # new ; friends
-# class FriendRequest(models.Model):
-# 	to_user = models.ForeignKey(User, related_name = 'to_user')
-# 	from_user = models.ForeignKey(User, related_name = 'from_user')
-# 	timestamp = models.DateTimeField(auto_now_add = True)
-
-# 	def __str__(self):
-# 		return "From {}, to {}".format(self.from_user.username, self.to_user.username)

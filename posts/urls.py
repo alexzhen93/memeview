@@ -13,6 +13,7 @@ urlpatterns = [
 		name='post-update'),
 	path('delete/<int:pk>/', PostDeleteView.as_view(),
 		name='post-delete'),
-	path('allcomments', views.allcomments, name='allcomments')
+	path('allcomments', views.allcomments, name='allcomments'),
+	path('log', views.adminlog, name = 'adminlog')
 
 ]
