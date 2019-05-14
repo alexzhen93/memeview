@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Posts, Comment, AllComment
+from .models import Posts, Comment, AllComment, AdminLog
 from .forms import CommentForm
 from django.views.generic import (
 	CreateView, 
@@ -130,3 +130,13 @@ class PostLikeToggle(LoginRequiredMixin, RedirectView):
                 obj.likes.add(user)
         print(url_)
         return url_
+
+def adminlog(request):
+
+	log = AdminLog.objects.all().order_by('-timestamp')
+	
+	context = {
+		'log': log
+	}
+
+	return render(request, 'posts/adminlog.html', context)

@@ -66,3 +66,11 @@ class AllComment(models.Model):
 	class Meta:
 		managed = False
 		db_table = "view_allcomments"
+
+# Admin log used with a Trigger
+class AdminLog(models.Model):
+	log = models.TextField(max_length = 255)
+	timestamp = models.DateTimeField(default = datetime.now, blank = True)
+
+	def __str__(self):
+		return self.log
