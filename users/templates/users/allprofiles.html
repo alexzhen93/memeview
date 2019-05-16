@@ -1,0 +1,11 @@
+{% extends "posts/layout.html" %}
+{% block content %}
+
+<h1>All Currently Registered Users</h1>
+<br>
+
+{% for user in users %}
+	<h2>{{user}}</h2>
+{% endfor %}
+
+{% endblock %}

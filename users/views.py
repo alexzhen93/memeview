@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from posts.models import Posts
-
+from django.db import connection
 
 # register user
 def register(request):
@@ -60,3 +60,16 @@ def get_user_profile(request, username = None, id=None):
 		'user_posts': user_posts
 	}
 	return render(request, 'users/profile.html', context)
+
+
+def get_all_users(request):
+	cur = connection.cursor()
+	cur.callproc('sort_users')
+	results = cur.fetchall()
+	cur.close()
+
+	context = {
+		'users': results
+	}
+
+	return render(request, 'users/allprofiles.html', context)
