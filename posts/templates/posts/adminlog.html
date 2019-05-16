@@ -3,9 +3,12 @@
 {% block content %}
 
 <head>
-	<h1>Admin Log</h1>
+	<h1><u> Admin Log </u></h1>
 </head>
 	
+	<h3> Number Of Users: <strong> {{ user_count }}</strong></h3>
+	<h3> Number Of Posts: <strong> {{ post_count }}</strong></h3>
+	<h3> Number Of Comments: <strong> {{ comment_count }}</strong></h3>
 	<body>
 	{% for log_post in log %}
 		<ul type = "square"> 
